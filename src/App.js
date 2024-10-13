@@ -4,7 +4,9 @@ import {
   Route,
 } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import Main from "./pages/Main";
+import Create from "./pages/Create";
+import Update from "./pages/Update";
+import Read from "./pages/Read";
 
 import "./App.css";
 
@@ -13,7 +15,9 @@ function App() {
     <Router>
       <ChakraProvider>
         <Switch>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Create />} />
+          <Route path="/update-clinic" element={<Update />} />
+          <Route path="/read" element={<Read />} />
         </Switch>
       </ChakraProvider>
     </Router>

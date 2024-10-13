@@ -3,6 +3,8 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+
 import {
   FormControl,
   FormLabel,
@@ -11,7 +13,7 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 
-const Main = () => {
+const Create = () => {
   const [detail, setDetail] = useState({
     id: "",
     title: "",
@@ -23,6 +25,7 @@ const Main = () => {
     setDetail({ ...detail, [name]: value });
     console.log("detail: ", detail);
   };
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,9 +95,16 @@ const Main = () => {
           </FormControl>
           <button onClick={handleSubmit}>save</button>
         </div>
+        <button
+          onClick={() => {
+            navigate("/read");
+          }}
+        >
+          See all Issues
+        </button>
       </div>
     </div>
   );
 };
 
-export default Main;
+export default Create;
