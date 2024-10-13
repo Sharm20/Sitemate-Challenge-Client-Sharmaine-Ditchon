@@ -13,13 +13,9 @@ import {
 
 const Main = () => {
   const [detail, setDetail] = useState({
-    firstName: "",
-    lastName: "",
-    dob: "",
-    employment_status: "",
-    sex: "",
-    address: "",
-    contact_num: "",
+    id: "",
+    title: "",
+    desc: "",
   });
 
   const handleInput = (e) => {
@@ -30,33 +26,26 @@ const Main = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!detail.firstName || !detail.lastName) {
+    if (!detail.id || !detail.title) {
       toast.error("Please fill in the form.");
       return;
     }
     console.log(detail);
     try {
-      const newEmp = await axios({
+      const newIssue = await axios({
         method: "POST",
-        url: "http://localhost:8080/api/employee/create",
+        url: "http://localhost:8080/api/issue/create",
         data: {
-          firstName: detail.firstName,
-          lastName: detail.lastName,
-          dob: detail.dob,
-          employment_status: detail.employment_status,
-          sex: detail.sex,
-          address: detail.address,
-          contact_num: detail.contact_num,
+          id: detail.id,
+          title: detail.title,
+          desc: detail.desc,
         },
       });
-      // const newEmp = await axios.post(
-      //   "http://localhost:8080/api/employee/create",
-      //   detail
-      // );
-      console.log("Response from server: ", newEmp.data);
-      if (newEmp) {
-        toast.success(newEmp.data.message);
-        console.log("new employee added: ", newEmp.data);
+
+      console.log("Response from server: ", newIssue.data);
+      if (newIssue) {
+        toast.success(newIssue.data.message);
+        console.log("new Issue added: ", newIssue.data);
         return;
       }
     } catch (error) {
@@ -76,20 +65,28 @@ const Main = () => {
       <div className="form-container">
         <div className="box">
           <FormControl>
-            <FormLabel>Name</FormLabel>
+            <FormLabel>ID</FormLabel>
             <Input
               type="text"
-              placeholder="First Name"
-              name="firstName"
-              value={detail.firstName}
+              placeholder="ID"
+              name="id"
+              value={detail.id}
               onChange={handleInput}
-              id="name"
+              id="id"
             />
             <Input
               type="text"
-              placeholder="Last Name"
-              name="lastName"
-              value={detail.lastName}
+              placeholder="title"
+              name="title"
+              value={detail.title}
+              onChange={handleInput}
+            />
+
+            <Input
+              type="text"
+              placeholder="desc"
+              name="desc"
+              value={detail.desc}
               onChange={handleInput}
             />
           </FormControl>
